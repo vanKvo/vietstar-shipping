@@ -68,6 +68,7 @@ error_reporting(E_ALL);
                                     <th>address</th>
                                     <th>phone</th>
                                     <th>email</th>
+ 
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,6 +93,7 @@ error_reporting(E_ALL);
                                                     <td><?= $items['recipient_phone']; ?></td>
                                                     <td><?= $items['recipient_email']; ?></td>
                                                     <td><a href="reedit.php?recipient_id=<?php echo $items['recipient_id']?>&customer_id=<?php echo $customer_id?>">Edit</a></td>
+                
 
                                                 </tr>
                                                 <?php

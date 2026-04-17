@@ -29,7 +29,7 @@ function decrease_supply($qty_picked,$product_id) {
   global $db; 
   $product = get_product($product_id);
   $qty_onhand = $product['qty_onhand'];
-  //if ($qty_onhand > 0 && $qty_picked <= $qty_onhand) {
+  if ($qty_onhand > 0 && $qty_picked <= $qty_onhand) {
     $sql = "UPDATE products 
     SET qty_onhand = qty_onhand-?
     WHERE product_id = ?";
@@ -37,9 +37,9 @@ function decrease_supply($qty_picked,$product_id) {
     $res = $q->execute(array($qty_picked,$product_id));
     if ($res) echo "<br>Success<br>";
     else echo "<br>Fail<br>";
-  /*} else {
+  } else {
     echo "This product is out of stock OR not enough the stock quantity required";
-  }*/
+  }
   echo " <br>End decrease_supply() <br>";
 }
 

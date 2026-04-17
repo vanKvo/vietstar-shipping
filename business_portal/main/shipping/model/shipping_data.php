@@ -102,7 +102,7 @@ function add_recipient($a, $b, $c, $d, $e) {
 function get_recipient($v1, $v2, $v3) {
   echo "<br>Start Get Recipient<br>";
   global $db;
-  $query = 'SELECT * FROM `recipient` WHERE customer_id = :v1 AND (recipient_name = :v2 OR recipient_phone = :v3)';
+  $query = 'SELECT * FROM `recipient` WHERE customer_id = :v1 AND recipient_name = :v2 AND recipient_phone = :v3';
   $stmt = $db->prepare($query);
   $res = $stmt->execute(array(
     ':v1' => $v1,

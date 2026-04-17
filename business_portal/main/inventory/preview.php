@@ -65,7 +65,7 @@ $cust_name=$sales[0]['sales_custname'];
 					<hr>
 					<li><a href="../index.php"><i class="icon-dashboard icon-2x"></i> Dashboard  </a></li> 
 					<li><a href="products.php"><i class="icon-list-alt icon-2x"></i> Inventory</a></li>    
-					<li><a href="purchase.php"><i class="icon-group icon-2x"></i> Store Orders </a> </li>     
+					<li><a href="purchase.php"><i class="icon-group icon-2x"></i> Purchase </a> </li>     
 					<li class="active"><a href="sales.php?id=cash&invoice=<?php echo $finalcode ?>"><i class="icon-shopping-cart icon-2x"></i> Sales </a></li>             
 					<li><a href="supplier.php"><i class="icon-group icon-2x"></i> Suppliers</a></li> 
 				</ul>               
