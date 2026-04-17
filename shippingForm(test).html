@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>VietStar Shipping Form</title>
+<link rel="stylesheet" href="shippingStyles.css">
+<script src="Scripts/swfobject_modified.js"></script>
+<link rel="shortcut icon" href="images/Vietstar Shipping Company Logo (No Background).png">
+
+<script src="js/datatables.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script defer src="formValidationScript.js"></script>
+
+<style>
+    .err { background: #ffe6ee; border: 1px solid #b1395f; }
+    .emsg { color: #c12020; font-weight: bold; }
+</style>
+
+</head>
+
+<header>    
+    <div class="logo_tl">
+        <a href="cusHomepage.html">
+        <img src="images\Vietstar Shipping Company Logo (With Company Name).PNG" title="VietStar Shipping Logo" alt="VietStar Shipping Logo" style="width:250px;height:250px;">
+        </a>
+
+        <div class="heading">
+            <H1>Customer Shippment Form</H1>
+        </div>
+    </div>
+
+    <div class="top_exit_button">
+        <a href="cusHomepage.html">
+            <button class="btn btn-primary" type="button">Exit Shipping Form</button>
+        </a>
+    </div>
+</header>
+
+<body>
+    <div class="container mt-5">
+        <form action="shippingForm_BE.php" method="POST" class="row g-5">
+
+            <div class="col-md-6" id="sender_border">
+                <!-- Sender's information -->
+
+                <h3>Sender's Information</h3> </br></br>
+                
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" tabindex="1" required>
+                        <div id="emsg_first_name" class="emsg_first_name"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" tabindex="2" required>
+                        <div id="emsg_last_name" class="emsg_last_name"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="address1" class="form-label">Address 1</label>
+                        <input type="text" class="form-control" id="address1" name="address1" placeholder="Address" tabindex="3" required>
+                        <div id="emsg_address1" class="emsg_address1"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="address2" class="form-label">Address 2</label>
+                        <input type="text" class="form-control" id="address2" name="address2" placeholder="Apt., PMB#, etc. (Optional)" tabindex="4">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City" tabindex="5" required>
+                        <div id="emsg_city" class="emsg_city"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="zip_code" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip Code" tabindex="6" required minlength="5" maxlength="10">
+                        <div id="emsg_zip_code" class="emsg_zip_code"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="state" class="form-label">State</label>
+                        <select name="state" id="state" tabindex="7" required>
+                            <option value=""></option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                        <div id="emsg_state" class="emsg_state"></div>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" tabindex="8" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                        <div id="emsg_email" class="emsg_email"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" tabindex="9" required minlength="10">
+                        <div id="emsg_phone" class="emsg_phone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Recipient's information -->
+                
+                <h3>Recipient's Information</h3> </br></br>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label for="first_name_r" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name_r" name="first_name_r" placeholder="First Name" tabindex="10" required>
+                        <div id="emsg_first_name_r" class="emsg_first_name_r"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last_name_r" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name_r" name="last_name_r" placeholder="Last Name" tabindex="11" required>
+                        <div id="emsg_last_name_r" class="emsg_last_name_r"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="address_r1" class="form-label">Address</label>
+                        <textarea class="form-control" rows="6" cols="50" id="address_r1" name="address_r1" placeholder="Recipient Address" tabindex="12" required></textarea>
+                        <div id="emsg_address_r1" class="emsg_address_r1"></div>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="email_r" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email_r" name="email_r" placeholder="Email (Optional)" tabindex="13" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="phone_r" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone_r" name="phone_r" placeholder="Phone (Optional)" tabindex="14">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" id="item_desc_area">
+                <!-- Item description field -->
+                
+                </br></br> <h3>Item Descriptions</h3> </br></br>
+
+                <div class="row">
+                    <div class="col-md-9">
+                        <label for="pkg1" class="form-label">Package 1</label>
+                        <input type="text" class="form-control" id="pkg1" name="pkg1" placeholder="Package 1 Item Descriptions" tabindex="15" required></input>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="pkg1_weight" class="form-label">Weight (lbs)</label>
+                        <input type="text" class="form-control" id="pkg1_weight" name="pkg1_weight" placeholder="Package 1 Weight" tabindex="16" required></input>
+                    </div>
+                    <div class="col-md-9">
+                        <label for="pkg2" class="form-label">Package 2</label>
+                        <input type="text" class="form-control" id="pkg2" name="pkg2" placeholder="Package 2 Item Descriptions" tabindex="17"></input>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="pkg2_weight" class="form-label">Weight (lbs)</label>
+                        <input type="text" class="form-control" id="pkg2_weight" name="pkg2_weight" placeholder="Package 2 Weight" tabindex="18"></input>
+                    </div>
+                    <div class="col-md-9">
+                        <label for="pkg3" class="form-label">Package 3</label>
+                        <input type="text" class="form-control" id="pkg3" name="pkg3" placeholder="Package 3 Item Descriptions" tabindex="19"></input>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="pkg3_weight" class="form-label">Weight (lbs)</label>
+                        <input type="text" class="form-control" id="pkg3_weight" name="pkg3_weight" placeholder="Package 3 Weight" tabindex="20"></input>
+                    </div>
+                    <div class="col-md-9">
+                        <label for="pkg4" class="form-label">Package 4</label>
+                        <input type="text" class="form-control" id="pkg4" name="pkg4" placeholder="Package 4 Item Descriptions" tabindex="21"></input>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="pkg4_weight" class="form-label">Weight (lbs)</label>
+                        <input type="text" class="form-control" id="pkg4_weight" name="pkg4_weight" placeholder="Package 4 Weight" tabindex="22"></input>
+                    </div>
+                    <div class="col-md-9">
+                        <label for="pkg5" class="form-label">Package 5</label>
+                        <input type="text" class="form-control" id="pkg5" name="pkg5" placeholder="Package 5 Item Descriptions" tabindex="23"></input>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="pkg5_weight" class="form-label">Weight (lbs)</label>
+                        <input type="text" class="form-control" id="pkg5_weight" name="pkg5_weight" placeholder="Package 5 Weight" tabindex="24"></input>
+                    </div>
+
+                </div>
+                <div class="form_buttons">
+                    <button class="btn btn-danger" id="reset_button" type="reset">Reset</button>
+                    <button class="btn btn-primary" id="submit_button" type="submit" data-bs-toggle="modal" data-bs-target="#submit_modal">Submit Shipping Form</button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="submit_modal" tabindex="-1" aria-labelledby="modal_label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal_label">Thank You!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">You have successfully submitted your shipping form</div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </form>
+
+    </div>
+</body>
+
+</html>
