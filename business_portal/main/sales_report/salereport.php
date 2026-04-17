@@ -17,35 +17,26 @@ $name=$_SESSION['SESS_NAME'];
 <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 <script src="js/scripts.js"></script>
 <style>
-	table{
-		border-collapse: collapse;
-		width: 100%;
-		color: #588c7e;
-		font-family: monospace;
-		font-size : 16px;
-		text-align: left;
-	}
-	th{
-		background-color: #588c7e;
-		color:black;
-	}
-	tr:nth-child(even) {
-        background-color: #f2f2f2;
-	}
-    tr:nth-child(even) .total_row {
-        background-color: #202020;
-    }
 	.sticky {
 		position: fixed;
-		top: 53 px;
+		top: 53px;
 	}
 
 	.top-sticky {
 		position: fixed;
 		top: 0;
 		width: 100%;
-}
-</style>	
+	}
+    /* Hidden print header helper */
+    #print_header {
+        display: none;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
   <?php include 'navfixed.php';?>
@@ -82,11 +73,20 @@ $name=$_SESSION['SESS_NAME'];
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                 <div class="col-md-4">
+                                  <div class="col-md-8">
                                     <div class="form-group">
                                       <button type="submit" class="btn btn-primary">Filter</button>
-                                      <!--<button onclick="window.print()" class= "btn btn-primary">Print</button>-->
-                                      <a href="javascript:Clickheretoprint()" class="btn btn-primary"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
+                                      <a href="salereport.php" class="btn btn-secondary">Reset</a>
+                                      <a href="javascript:Clickheretoprint()" class="btn btn-info"><i class="fa fa-print"></i> Print</a>
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                          <i class="fa fa-download"></i> Export
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                          <li><a class="dropdown-item" href="javascript:exportToExcel('saletable', 'Shipping_Sales_Report')"><i class="fa fa-file-excel-o"></i> Excel</a></li>
+                                          <li><a class="dropdown-item" href="javascript:exportToPDF('saletable', 'Shipping Sales Report')"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
+                                        </ul>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
@@ -95,8 +95,14 @@ $name=$_SESSION['SESS_NAME'];
                 </div>
 
                 <div class="card mt-4">
+                    <div id="print_header">
+                        <h2>Vietstar Shipping</h2>
+                        <h3>Shipping Sales Report</h3>
+                        <p>Period: <?php echo (isset($_GET['from_date']) && $_GET['from_date'] != '') ? $_GET['from_date'] : 'All'; ?> to <?php echo (isset($_GET['to_date']) && $_GET['to_date'] != '') ? $_GET['to_date'] : 'Today'; ?></p>
+                        <hr>
+                    </div>
                     <div class="card-body">
-                        <table class="table table-borderd">
+                        <table class="table table-bordered table-striped table-hover bg-white" id="saletable">
                             <thead>
                                 <tr>
                                     <th>MST</th>
@@ -119,13 +125,17 @@ $name=$_SESSION['SESS_NAME'];
                                 $total_weight = 0;
                                 $num_pkg = 0;
 
-                                if(isset($_GET['from_date']) && isset($_GET['to_date']))
+                                if(isset($_GET['from_date']) && isset($_GET['to_date']) && $_GET['from_date'] != '' && $_GET['to_date'] != '')
                                 {
-                                    $from_date = $_GET['from_date'];
-                                    $to_date = $_GET['to_date'];
-
-                                    $query = "SELECT * FROM shipping_order WHERE send_date BETWEEN '$from_date' AND '$to_date' ";
-                                    $query_run = mysqli_query($con, $query);
+                                    $from_date = mysqli_real_escape_string($con, $_GET['from_date']);
+                                    $to_date = mysqli_real_escape_string($con, $_GET['to_date']);
+                                    $query = "SELECT * FROM shipping_order WHERE DATE(send_date) >= '$from_date' AND DATE(send_date) <= '$to_date' ";
+                                }
+                                else
+                                {
+                                    $query = "SELECT * FROM shipping_order ORDER BY send_date DESC LIMIT 100";
+                                }
+                                $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
                                     {
@@ -150,11 +160,14 @@ $name=$_SESSION['SESS_NAME'];
                                             <?php
                                         }
                                     }
+                                    else if (!$query_run)
+                                    {
+                                        echo "Query Failed: " . mysqli_error($con);
+                                    }
                                     else
                                     {
                                         echo "No Record Found";
                                     }
-                                }
                             ?>
                                             <tr class="total_row">
                                                 <td>TOTAL</td>
@@ -183,18 +196,58 @@ $name=$_SESSION['SESS_NAME'];
 
      function Clickheretoprint() { 
         var disp_setting="toolbar=yes,location=no,directories=yes,menubar=yes,"; 
-            disp_setting+="scrollbars=yes,width=800, height=400, left=100, top=25"; 
-        var content_vlue = document.getElementById("print_content").innerHTML; 
+            disp_setting+="scrollbars=yes,width=1000, height=800, left=100, top=25"; 
+        
+        var header = document.getElementById("print_header").innerHTML;
+        var table = document.getElementById("saletable").outerHTML;
         
         var docprint=window.open("","",disp_setting); 
         docprint.document.open(); 
-        docprint.document.write('<html><head><title>Vietstar Shipping</title><link rel="stylesheet" type="text/css" href="../../css/shipping_invoice.css"><link rel="stylesheet" href="../../css/lib/bootstrap.css">'); 
-        docprint.document.write('<style>table{ border-collapse: collapse;width: 100%; font-family: monospace;font-size : 18px; text-align: left;} th{color:black;}tr:nth-child(even) {background-color: #f2f2f2;}</style>');
-        docprint.document.write('</head><body onLoad="self.print()">');          
-        docprint.document.write(content_vlue); 
+        docprint.document.write('<html><head><title>Vietstar Shipping Report</title>'); 
+        docprint.document.write('<link rel="stylesheet" href="../css/lib/bootstrap.css">');
+        docprint.document.write('<style>');
+        docprint.document.write('body { font-family: sans-serif; padding: 20px; }');
+        docprint.document.write('table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 12px; }');
+        docprint.document.write('th, td { border: 1px solid #dee2e6; padding: 8px; text-align: left; }');
+        docprint.document.write('th { background-color: #f8f9fa; font-weight: bold; }');
+        docprint.document.write('.total_row { font-weight: bold; background-color: #eee; }');
+        docprint.document.write('h2, h3 { text-align: center; margin: 5px 0; }');
+        docprint.document.write('hr { margin: 20px 0; }');
+        docprint.document.write('@media print { .no-print { display: none; } }');
+        docprint.document.write('</style></head><body onLoad="self.print()">');          
+        docprint.document.write('<div class="container">');
+        docprint.document.write(header);
+        docprint.document.write(table); 
+        docprint.document.write('</div>');
         docprint.document.write('</body></html>'); 
         docprint.document.close(); 
         docprint.focus(); 
+    }
+
+    function exportToExcel(tableID, filename) {
+        var table = document.getElementById(tableID);
+        var wb = XLSX.utils.table_to_book(table, {sheet: "Sheet1"});
+        XLSX.writeFile(wb, filename + ".xlsx");
+    }
+
+    function exportToPDF(tableID, title) {
+        const { jsPDF } = window.jspdf;
+        var doc = new jsPDF('l', 'pt', 'a4');
+        
+        doc.text(title, 40, 40);
+        doc.setFontSize(10);
+        var dateInfo = "Period: " + (document.querySelector('input[name="from_date"]').value || 'All') + " to " + (document.querySelector('input[name="to_date"]').value || 'Now');
+        doc.text(dateInfo, 40, 60);
+
+        doc.autoTable({
+            html: '#' + tableID,
+            startY: 80,
+            theme: 'grid',
+            styles: { fontSize: 8 },
+            headStyles: { fillColor: [41, 128, 185], textColor: 255 }
+        });
+        
+        doc.save(title.replace(/ /g, '_') + ".pdf");
     }
     </script>
 </body>

@@ -2,8 +2,8 @@
 include('../connect.php');
 include('function.php');
 require_once('auth.php');
-$position=$_SESSION['SESS_POSITION'];
-$name=$_SESSION['SESS_NAME'];
+$position = $_SESSION['SESS_POSITION'] ?? '';
+$name = $_SESSION['SESS_NAME'] ?? '';
 $finalcode=createRandomPassword();
 ?>
 <html>
@@ -96,7 +96,9 @@ function sum() {
 	<li><a href="../index.php">Dashboard</a></li> /
 	<li class="active">Products</li>
 	</ul>
-
+	<div class="col-2">
+      <a href="../shipping/view/shipping_form_online.php" >Go to Shipping Form</a>
+  </div>  
 
 <div style="margin-top: -19px; margin-bottom: 21px;">
 			<?php 
