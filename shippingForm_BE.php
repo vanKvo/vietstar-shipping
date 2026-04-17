@@ -9,8 +9,13 @@
     $full_name = $_POST['full_name'];
     $num_of_package = $_POST['num_of_package'];
     $package_value = $_POST['package_value'];
+<<<<<<< HEAD
     if (empty($_POST['package_value']))  $package_value = 0;
     else  $package_value = $_POST['package_value'];
+=======
+    if (empty($_POST['package_value'])) $package_value =0;
+    else $package_value =$_POST['package_value'];
+>>>>>>> elham
     $address1 = $_POST['address1'];
     $city = $_POST['city'];
     $zip_code = $_POST['zip_code'];
@@ -102,7 +107,10 @@
            ':v16' =>$pkg1
            ));
         header("location: shipping.php");
+<<<<<<< HEAD
 
+=======
+>>>>>>> elham
         if ($res) echo '<br>Success<br>';
         else echo '<br>Fail<br>';
 ?>

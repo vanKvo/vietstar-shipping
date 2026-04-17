@@ -1,5 +1,6 @@
 <?php
 //echo 'connect.php file';
+<<<<<<< HEAD
   /*$dsn = 'mysql:host=localhost;dbname=vietstar_shipping';
   $username = 'root';
   $password = 'root';*/
@@ -13,14 +14,28 @@
   $con = mysqli_connect("ls-a9bf68472683f6dbeaf64fcf64ce7c81bf5fa6d6.cv9qb4mlh1sf.us-east-1.rds.amazonaws.com","dbmasteruser","P2TtK([idwq^vMLbU=".'$dE4l'.",p0)$=3O=","vietstar_shipping"); 
 
   /**  Create DB Connection **/
+=======
+  $dsn = 'mysql:host=localhost;dbname=vietstar_shipping';
+  $username = 'root';
+  $password = 'root';
+  /**  Create DB Connection */
+>>>>>>> elham
   try {
     //$db = new PDO($dsn, $username);
     $db = new PDO($dsn, $username, $password);
 } catch (PDOException $e) {
     $error = "Database Error: ";
     $error .= $e->getMessage();
+<<<<<<< HEAD
+=======
+    //include('view/error.php');
+>>>>>>> elham
     exit();
 }
 
   
+<<<<<<< HEAD
 ?>	
+=======
+?>
+>>>>>>> elham

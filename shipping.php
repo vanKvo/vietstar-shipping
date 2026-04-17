@@ -92,7 +92,11 @@ include('./connect.php');
 				alert("Required data missing");
 				return;
 				}else
+<<<<<<< HEAD
 				    //alert("Your Form has been submitted. You can now take your items to the store.");
+=======
+				    alert("Your Form has been submitted. You can now take your items to the store.");
+>>>>>>> elham
                     var modalToggle = document.getElementById('MyModal') // relatedTarget
                         myModal.show(modalToggle)   
 				    return;
@@ -203,7 +207,11 @@ include('./connect.php');
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-0 rounded sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
+<<<<<<< HEAD
                 <img src="./Assets/redLogo.PNG" alt="Avatar Logo"
+=======
+                <img src="./Assets/logo/NewVietstarLogo.png" alt="Avatar Logo"
+>>>>>>> elham
                         style="width:40px;" class="rounded-pill">
             </a>
             <a class="navbar-brand" href="./index.html">
@@ -273,8 +281,13 @@ include('./connect.php');
 <!--Carousal ends-->
 
    
+<<<<<<< HEAD
     <div class="container mt-5 ">
         <form  name= "shippingForm_BE" action="shippingForm_BE.php" method="POST" data-toggle="modal" class="row g-5 "> 
+=======
+    <div class="container mt-5">
+        <form name= "shippingForm_BE" action="shippingForm_BE.php" method="POST" data-toggle="modal" class="row g-5 "> 
+>>>>>>> elham
 
             <div class="col-md-6" id="sender_border">
                 <!-- Sender's information -->
@@ -399,7 +412,11 @@ include('./connect.php');
                     </div>
                     <div class="col-md-4">
                         <label for="phone_r" class="form-label">Phone</label>
+<<<<<<< HEAD
                         <input type="text" class="form-control" id="phone_r" name="phone_r" placeholder="Phone " tabindex="10" required>
+=======
+                        <input type="text" class="form-control" id="phone_r" name="phone_r" placeholder="Phone " tabindex="10" required maxlength="20">
+>>>>>>> elham
                     </div>
                     
                 </div>

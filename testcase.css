@@ -416,8 +416,12 @@ section {
 
 .card {
   border: 1px solid #eee;
+<<<<<<< HEAD
   cursor: pointer;
   height: ;
+=======
+  cursor: pointer
+>>>>>>> elham
 }
 
 .weight {
@@ -661,9 +665,16 @@ h3 {
 }
 
 /*Custom Fees Page*/
+<<<<<<< HEAD
 /*.custom-fees-table {
  margin-right:3rem!important;margin-left:3rem!important;
 }*/
+=======
+.custom-fees-table {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+>>>>>>> elham
 
 table th {
   width: auto !important;
@@ -730,6 +741,7 @@ table th {
 
 .center-pic {
   align-items: center;
+<<<<<<< HEAD
 }
 #about-us-carousel-indicators .carousel .carousel-item {
   height: 200px;
@@ -749,4 +761,6 @@ table th {
   background-size: cover;
   padding: 120px 0 100px;
     padding-bottom: 100px;
+=======
+>>>>>>> elham
 }
