@@ -17,10 +17,10 @@ if (!$recipient) {
     exit;
 }
 
-$recipient_name = $recipient['recipient_name'];
-$recipient_address = $recipient['recipient_address'];
-$recipient_email = $recipient['recipient_email'];
-$recipient_phone = $recipient['recipient_phone'];
+$recipient_name = $recipient['recipient_name'] ?? '';
+$recipient_address = $recipient['recipient_address'] ?? '';
+$recipient_email = $recipient['recipient_email'] ?? '';
+$recipient_phone = $recipient['recipient_phone'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,11 +72,11 @@ $recipient_phone = $recipient['recipient_phone'];
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($recipient_email) ?>">
+                                    <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($recipient_email ?? '') ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Phone <span class="required">*</span></label>
-                                    <input type="tel" id="recipient_phone" class="form-control" name="phone" value="<?php echo htmlspecialchars($recipient_phone) ?>" placeholder="XXX-XXX-XXXX" required>
+                                    <input type="tel" id="recipient_phone" class="form-control" name="phone" value="<?php echo htmlspecialchars($recipient_phone ?? '') ?>" placeholder="XXX-XXX-XXXX" required>
                                     <small class="text-muted">Format: 10 digits</small>
                                 </div>
                                 <button class="btn btn-primary w-100" name="update">Update Recipient</button>

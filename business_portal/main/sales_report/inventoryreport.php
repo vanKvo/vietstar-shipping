@@ -124,19 +124,24 @@ $name=$_SESSION['SESS_NAME'];
 
                                 if(isset($_GET['from_date']) && isset($_GET['to_date']) && $_GET['from_date'] != '' && $_GET['to_date'] != '')
                                 {
-                                    $from_date = mysqli_real_escape_string($con, $_GET['from_date']);
-                                    $to_date = mysqli_real_escape_string($con, $_GET['to_date']);
-                                    $query = "SELECT * FROM sales WHERE DATE(sales_date) >= '$from_date' AND DATE(sales_date) <= '$to_date' ";
+                                    $from_date = $_GET['from_date'];
+                                    $to_date = $_GET['to_date'];
+                                    $query = "SELECT * FROM sales WHERE DATE(sales_date) >= :from_date AND DATE(sales_date) <= :to_date ";
+                                    $stmt = $db->prepare($query);
+                                    $stmt->execute([':from_date' => $from_date, ':to_date' => $to_date]);
                                 }
                                 else
                                 {
                                     $query = "SELECT * FROM sales ORDER BY sales_date DESC LIMIT 100";
+                                    $stmt = $db->query($query);
                                 }
-                                $query_run = mysqli_query($con, $query);
+                                
+                                if($stmt) {
+                                    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                                    if(mysqli_num_rows($query_run) > 0)
+                                    if(count($rows) > 0)
                                     {
-                                        foreach($query_run as $row)
+                                        foreach($rows as $row)
                                         {
                                             $total = $total + $row['sales_amount']; 
                                             ?>
@@ -152,14 +157,16 @@ $name=$_SESSION['SESS_NAME'];
                                             <?php
                                         }
                                     }
-                                    else if (!$query_run)
-                                    {
-                                        echo "Query Failed: " . mysqli_error($con);
-                                    }
                                     else
                                     {
                                         echo "No Record Found";
                                     }
+                                }
+                                else
+                                {
+                                    $errorInfo = $db->errorInfo();
+                                    echo "Query Failed: " . ($errorInfo[2] ?? 'Unknown error');
+                                }
                             ?>
                                             <tr>
                                                 <td>TOTAL</td>

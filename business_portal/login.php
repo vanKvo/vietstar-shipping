@@ -8,18 +8,15 @@ $errmsg_arr = array();
 //Validation error flag
 $errflag = false;
 
-//Connect to mysql server. Standard: host, username, password, database, port
-$conn = mysqli_connect('localhost', 'root', 'root', 'vietstar_shipping');
-if (!$conn) {
-	die('Failed to connect to server: ' . mysqli_error($conn));
-}
-
+//Connect to mysql server
+require_once 'main/connect.php';
+// connect.php exposes $con
+$conn = $con;
 
 //Function to sanitize values received from the form. Prevents SQL injection
 function clean($str, $conn) // Added $conn as a parameter
 {
 	$str = trim($str);
-	// magic_quotes is gone, so we just use the modern escape function
 	return mysqli_real_escape_string($conn, $str);
 }
 
@@ -53,7 +50,6 @@ $result = mysqli_query($conn, $query);
 //Check whether the query was successful or not
 if ($result) {
 	if (mysqli_num_rows($result) > 0) {
-		echo 'Login Successful';
 		session_regenerate_id();
 		$member = mysqli_fetch_assoc($result);
 		$_SESSION['SESS_MEMBER_ID'] = $member['id'];

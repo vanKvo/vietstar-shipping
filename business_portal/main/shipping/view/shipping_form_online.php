@@ -342,9 +342,9 @@ $tmp = get_temp_shipping_order($shipping_order_id);
             <?php } ?>
           </div><!--item package_div-->
           <button type="button" id="add-package-btn" class="custom-btn col-1"><i class="fa fa-plus-circle"
-              aria-hidden="true"></i> Add</button>
+              aria-hidden="true"></i></button>
           <button type="button" id="remove-package-btn" class="custom-btn col-1"><i class="fa fa-minus-circle"
-              aria-hidden="true"></i> Remove</button>
+              aria-hidden="true"></i></button>
         </div><!--row-->
         <div class="row">
           <div class="subheader mt-3"> In-store items </div>
@@ -362,8 +362,6 @@ $tmp = get_temp_shipping_order($shipping_order_id);
           <button type="button" id="add-item-btn" class="custom-btn col-1"><i class="fa fa-plus-circle"
               aria-hidden="true"></i></button>
           <button type="button" id="remove-item-btn" class="custom-btn col-1"><i class="fa fa-minus-circle"
-              aria-hidden="true"></i></button>
-          <button type="button" id="cal-item-btn" class="custom-btn col-1"><i class="fa fa-calculator"
               aria-hidden="true"></i></button>
           <!--End forum table-->
         </div><!--row-->
@@ -537,7 +535,7 @@ $tmp = get_temp_shipping_order($shipping_order_id);
   $(document).ready(function () {
     // Get the value of select option and search values in the select option
     /** Auto Format Phone fields */
-    $('#cust_phone, #recipient_phone').on('input', function (e) {
+    $('#cust_phone, #recipient_phone, #recipient_phone_new').on('input', function (e) {
       if (e.target.value.length > 0) {
         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
         e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
@@ -577,10 +575,29 @@ $tmp = get_temp_shipping_order($shipping_order_id);
     $(".chzn-select").chosen({ width: "100%" }).change(function () {
       // alert($(this).val());
     });
+    function calcTotalInstore() {
+      var total_instore = 0;
+      $('.forum-table-row').each(function() {
+        var qty = parseInt($(this).find('.instore-qty').val()) || 0;
+        var selectedOpt = $(this).find('.instore-item option:selected');
+        var unitPrice = 0;
+        if(selectedOpt.length > 0 && selectedOpt.attr('data-value')) {
+           try {
+             var dataStr = selectedOpt.attr('data-value').replace(/'/g, '"');
+             var data = JSON.parse(dataStr);
+             unitPrice = parseFloat(data.unit_price) || 0;
+           } catch(e) {}
+        }
+        total_instore += qty * unitPrice;
+      });
+      $('#instore').val(total_instore.toFixed(2));
+      updateTotalAmount();
+    }
+
     // Automatically calculate inventory
-    $(".forum-table-header-cell").on('input', '.instore-item', function () { // when user change a package weight
-      alert('instore is clikced');
-    });
+    $('#forum-table-body').on('input', '.instore-qty', calcTotalInstore);
+    $('#forum-table-body').on('change', '.instore-item', calcTotalInstore);
+
     /**  Add Item */
     var item_idx = -1;
     $('#num_of_items').val(item_idx);
@@ -598,34 +615,24 @@ $tmp = get_temp_shipping_order($shipping_order_id);
       <?php } ?>
         + ' </select>'
         + '</div>'
-        + '<div class="forum-table-header-cell"><input class="instore-item" type="number" id="picked_qty' + item_idx + '" name="picked_qty' + item_idx + '"></div>'
+        + '<div class="forum-table-header-cell"><input class="instore-qty" type="number" id="picked_qty' + item_idx + '" name="picked_qty' + item_idx + '" min="0"></div>'
         + ' </div>';
       $('#forum-table-body').append(item);
       $('#num_of_items').val(item_idx);
-      $(".chzn-select").chosen().change(function () { // this function allows we can type text in select tag
-        // alert($(this).val());
+      $(".chzn-select").chosen().change(function () {
+         calcTotalInstore();
       });
     });
 
     /** Remove Item */
     $('#remove-item-btn').on('click', function () {
-      var id = 'item' + item_idx;
-      $('#' + id).remove();
-      item_idx = item_idx - 1;
-      $('#num_of_items').val(item_idx);
-    });
-
-    /** Automatically calculate total amount of picked instore items */
-    $('#cal-item-btn').on('click', function () {
-      //alert('cal Total Instore Amount | item_idx: '+ item_idx);
-      var total_instore = 0;
-      for (let k = item_idx; k > -1; k--) {
-        var qty = parseInt($('#picked_qty' + k).val());
-        var unit_price = parseFloat($('#item' + k).find(":selected").data("value").unit_price);
-        total_instore = total_instore + qty * unit_price;
-        console.log('Item_idx: ' + k + ' Total: ' + total_instore);
+      if(item_idx >= 0) {
+        var id = 'item' + item_idx;
+        $('#' + id).remove();
+        item_idx = item_idx - 1;
+        $('#num_of_items').val(item_idx);
+        calcTotalInstore();
       }
-      $('#instore').val(total_instore.toFixed(2));
     });
 
     // --- NEW CALCULATION LOGIC ---

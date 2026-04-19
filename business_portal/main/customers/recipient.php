@@ -77,13 +77,15 @@ error_reporting(E_ALL);
                                     if(isset($_GET['customer_id']))
                                     {
                                         $customer_id = $_GET['customer_id'];
-                                        $query = "SELECT * FROM customer c JOIN  recipient r ON c.customer_id = r.customer_id WHERE c.customer_id = $customer_id";
-                                        //$query = "SELECT * FROM customer WHERE customer_id=$customer_id";
-                                        $query_run = mysqli_query($con, $query);
+                                        $query = "SELECT * FROM customer c JOIN recipient r ON c.customer_id = r.customer_id WHERE c.customer_id = :customer_id";
+                                        $stmt = $db->prepare($query);
+                                        $stmt->execute([':customer_id' => $customer_id]);
+                                        
+                                        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                                        if(mysqli_num_rows($query_run) > 0)
+                                        if($rows && count($rows) > 0)
                                         {
-                                            foreach($query_run as $items)
+                                            foreach($rows as $items)
                                             {
                                                 ?>
                                                 <tr>

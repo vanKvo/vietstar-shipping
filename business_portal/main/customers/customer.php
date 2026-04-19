@@ -97,18 +97,23 @@ error_reporting(E_ALL);
 
                                 if (!empty($_GET['GetID'])) {
                                     $customer_id = $_GET['GetID'];
-                                    $query = "SELECT * FROM customer WHERE customer_id=$customer_id";
+                                    $query = "SELECT * FROM customer WHERE customer_id = :customer_id";
+                                    $stmt = $db->prepare($query);
+                                    $stmt->execute([':customer_id' => $customer_id]);
                                 } else if (!empty($_GET['search'])) {
-                                    $filtervalues = $_GET['search'];
-                                    $query = "SELECT * FROM customer WHERE CONCAT(customer_id,cust_name,cust_address,cust_city,cust_state,cust_zipcode,cust_email,cust_phone) LIKE '%$filtervalues%'";
+                                    $filtervalues = '%' . $_GET['search'] . '%';
+                                    $query = "SELECT * FROM customer WHERE CONCAT(customer_id,cust_name,cust_address,cust_city,cust_state,cust_zipcode,cust_email,cust_phone) LIKE :search";
+                                    $stmt = $db->prepare($query);
+                                    $stmt->execute([':search' => $filtervalues]);
                                 } else {
                                     $query = "SELECT * FROM customer ORDER BY customer_id DESC LIMIT 100";
+                                    $stmt = $db->query($query);
                                 }
 
-                                $query_run = mysqli_query($con, $query);
+                                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                                if ($query_run && mysqli_num_rows($query_run) > 0) {
-                                    foreach ($query_run as $items) {
+                                if ($rows && count($rows) > 0) {
+                                    foreach ($rows as $items) {
                                         ?>
                                         <tr>
                                             <td><?= $items['customer_id']; ?></td>

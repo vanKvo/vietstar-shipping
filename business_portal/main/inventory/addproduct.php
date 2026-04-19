@@ -25,38 +25,51 @@ require_once('auth.php');
 </form>
 
 <script>
+var upcDuplicate = false;
+
 function formValidation() {
 	var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
 	var unit_price = $('#unit_price').val();
 
 	// checking if selling price is a number
-  if (!numberRegex.test(unit_price)) {
-    alert("Xin vui lòng nhập chữ số cho giá bán - Please enter a number for Selling Price");
-    return false;
-  } 
-  return true;
+	if (!numberRegex.test(unit_price)) {
+		alert("Xin vui lòng nhập chữ số cho giá bán - Please enter a number for Selling Price");
+		return false;
+	}
+
+	if (upcDuplicate) {
+		alert("Universal Product Code (UPC) already exists. Please use a unique UPC.");
+		return false;
+	}
+
+	return true;
 }
 
-$(document).ready(function(){
-	$("#product_name").change(function(){
+$(document).ready(function () {
+	$("#product_code").change(function () {
 		var product_code = $('#product_code').val();
-		$.ajax({
-			type: 'GET',
-			url: 'checkproductcode.php',
-			dataType: 'json',
-			data: {'product_code':product_code},
-			success: function(response){
-				if (response.num == 1) {
-					alert('Universal Product Code (UPC) exists');
+		if (product_code != '') {
+			$.ajax({
+				type: 'GET',
+				url: 'checkproductcode.php',
+				dataType: 'json',
+				data: { 'product_code': product_code },
+				success: function (response) {
+					if (response.num >= 1) {
+						alert('Universal Product Code (UPC) exists');
+						upcDuplicate = true;
+						$('#product_code').css('border-color', 'red');
+					} else {
+						upcDuplicate = false;
+						$('#product_code').css('border-color', '');
+					}
+				},
+				error: function () {
+					alert("Get ERROR when request checkproductcode.php");
 				}
-			},
-			error: function(){
-				alert("Get ERROR when request checkproductcode.php");
-			}
- 		});
-  });
-
-
+			});
+		}
+	});
 });
 </script>
 <!--</body>
