@@ -424,15 +424,15 @@ $tmp = get_temp_shipping_order($shipping_order_id);
               <label class="fw-bold">Payment Method<span class="required">*</span></label>
             </div><!--col-6-->
             <div class="col-9">
-              <input type="radio" name="pmt" value="cash" required>
+              <input type="radio" name="pmt" value="Cash" required>
               <span> Cash |</span>
-              <input type="radio" name="pmt" value="credit" required>
+              <input type="radio" name="pmt" value="Credit" required>
               <span> Debit/Credit (3%) |</span>
-              <input type="radio" name="pmt" value="zelle" required>
+              <input type="radio" name="pmt" value="Zelle" required>
               <span> Zelle |</span>
-              <input type="radio" name="pmt" value="venmo" required>
+              <input type="radio" name="pmt" value="Venmo" required>
               <span> Venmo |</span>
-              <input type="radio" name="pmt" value="check" required>
+              <input type="radio" name="pmt" value="Check" required>
               <span> Check </span>
             </div><!--col-6-->
           </div><!--row-->
@@ -472,7 +472,7 @@ $tmp = get_temp_shipping_order($shipping_order_id);
     var recipient_phone = document.getElementById('recipient_phone');
 
     var cust_phone_raw = cust_phone.value.replace(/-/g, '');
-    var recipient_phone_raw = recipient_phone.value ? recipient_phone.value.replace(/-/g, '') : '';
+    var recipient_phone_raw = (recipient_phone && recipient_phone.value) ? recipient_phone.value.replace(/-/g, '') : '';
 
     // checking phone number
     if (!cust_phone_raw.match(/^[0-9]{10}$/)) {
@@ -549,7 +549,20 @@ $tmp = get_temp_shipping_order($shipping_order_id);
 
     /** Toggle recipient form */
     $(".add-recipient-btn").click(function () {
-      $("#recipient_form").toggle();
+      var form = $("#recipient_form");
+      var isHidden = form.hasClass("hidden") || form.css("display") === "none";
+
+      if (isHidden) {
+        form.removeClass("hidden").show();
+        $('#recipient').val('').prop('disabled', true).trigger('chosen:updated');
+        $(this).text('Cancel New Recipient');
+      } else {
+        form.addClass("hidden").hide();
+        $('#recipient').prop('disabled', false).trigger('chosen:updated');
+        // Clear the new recipient form fields
+        $('#recipient_name, #recipient_address, #recipient_phone_new, #recipient_email').val('');
+        $(this).text('Add New Recipient');
+      }
     });
 
     /** Add Package */
@@ -577,16 +590,16 @@ $tmp = get_temp_shipping_order($shipping_order_id);
     });
     function calcTotalInstore() {
       var total_instore = 0;
-      $('.forum-table-row').each(function() {
+      $('.forum-table-row').each(function () {
         var qty = parseInt($(this).find('.instore-qty').val()) || 0;
         var selectedOpt = $(this).find('.instore-item option:selected');
         var unitPrice = 0;
-        if(selectedOpt.length > 0 && selectedOpt.attr('data-value')) {
-           try {
-             var dataStr = selectedOpt.attr('data-value').replace(/'/g, '"');
-             var data = JSON.parse(dataStr);
-             unitPrice = parseFloat(data.unit_price) || 0;
-           } catch(e) {}
+        if (selectedOpt.length > 0 && selectedOpt.attr('data-value')) {
+          try {
+            var dataStr = selectedOpt.attr('data-value').replace(/'/g, '"');
+            var data = JSON.parse(dataStr);
+            unitPrice = parseFloat(data.unit_price) || 0;
+          } catch (e) { }
         }
         total_instore += qty * unitPrice;
       });
@@ -620,13 +633,13 @@ $tmp = get_temp_shipping_order($shipping_order_id);
       $('#forum-table-body').append(item);
       $('#num_of_items').val(item_idx);
       $(".chzn-select").chosen().change(function () {
-         calcTotalInstore();
+        calcTotalInstore();
       });
     });
 
     /** Remove Item */
     $('#remove-item-btn').on('click', function () {
-      if(item_idx >= 0) {
+      if (item_idx >= 0) {
         var id = 'item' + item_idx;
         $('#' + id).remove();
         item_idx = item_idx - 1;

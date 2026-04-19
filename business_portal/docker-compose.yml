@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    volumes:
+      - db_data:/var/lib/mysql
+      # Mount schema and seed data sequentially for auto-initialization
+      - ../database/vietstar_shipping_v6.sql:/docker-entrypoint-initdb.d/1_schema.sql
+      - ../database/vietstar_shipping_users.sql:/docker-entrypoint-initdb.d/2_users.sql
+      - ../database/vietstar_shipping_data.sql:/docker-entrypoint-initdb.d/3_data.sql
+
+volumes:
+  db_data:

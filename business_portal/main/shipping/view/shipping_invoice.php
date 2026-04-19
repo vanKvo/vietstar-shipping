@@ -108,16 +108,16 @@ $total_instore = 0;
       <div id="print_content" class="invoice">
         <div class="row">
           <div class="invoice-company text-inverse f-w-600 col-6">
-            Vietstar Shipping Eden Center
+            Vietstar Shipping Center
           </div>
-          <div id="business-info" class="col-6">
+          <!--<div id="business-info" class="col-6">
             <p>
-              <span class="m-r-10"><i class="fa fa-fw fa-lg fa-address-card"></i> Address: 6799 Wilson Blvd #26,
-                <br>Falls Church, VA 22044</span><br>
-              <span class="m-r-10"><i class="fa fa-fw fa-lg fa-phone"></i> Tel: (703) 536-8888</span><br>
-              <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i>Website: vietstarshippingec.com</span><br>
+              <span class="m-r-10"><i class="fa fa-fw fa-lg fa-address-card"></i> Address: XXX,
+                <br>City, State ZIP</span><br>
+              <span class="m-r-10"><i class="fa fa-fw fa-lg fa-phone"></i> Tel: (XXX) XXX-XXXX</span><br>
+              <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i>Website: xxx</span><br>
             </p>
-          </div>
+          </div>-->
         </div>
         <!-- begin invoice-header -->
         <div class="invoice-header">

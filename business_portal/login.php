@@ -23,7 +23,7 @@ function clean($str, $conn) // Added $conn as a parameter
 //Sanitize the POST values
 $login = clean($_POST['username'], $conn);
 $password = clean($_POST['password'], $conn);
-$hash = hash('sha1', $password);
+$hash = hash('sha256', $password);
 
 //Input Validations
 if ($login == '') {
@@ -59,9 +59,9 @@ if ($result) {
 		header("location: main/index.php");
 		exit();
 	} else {
-		//Login failed
-		header("location: index.php");
-		exit();
+		echo "Login failed";
+		//header("location: index.php");
+		//exit();
 	}
 } else {
 	die("Query failed");
