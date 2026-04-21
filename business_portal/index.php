@@ -2,6 +2,9 @@
 	//Start session
 	session_start();
 	
+	// Load environment variables, Sentry, and DB
+	require_once 'main/connect.php';
+
 	//Unset the variables stored in session
 	unset($_SESSION['SESS_MEMBER_ID']);
 	unset($_SESSION['SESS_NAME']);
@@ -12,6 +15,15 @@
 	<title>
 	Vietstar Shipping
 	</title>
+    <?php if (!empty($_ENV['CLARITY_ID'])): ?>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "<?php echo htmlspecialchars($_ENV['CLARITY_ID']); ?>");
+    </script>
+    <?php endif; ?>
 	<link href="main/css/lib/bootstrap.css" rel="stylesheet">
 	<link href="main/css/lib/bootstrap-responsive.css" rel="stylesheet">
     <style type="text/css">

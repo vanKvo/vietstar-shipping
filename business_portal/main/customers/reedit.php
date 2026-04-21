@@ -36,9 +36,20 @@ $recipient_phone = $recipient['recipient_phone'] ?? '';
     <link rel="stylesheet" type="text/css" href="../css/maindashboard.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <style>
-        .sticky { position: fixed; top: 53px; }
-        .top-sticky { position: fixed; top: 0; width: 100%; }
-        .required { color: red; }
+        .sticky {
+            position: fixed;
+            top: 53px;
+        }
+
+        .top-sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .required {
+            color: red;
+        }
     </style>
 </head>
 
@@ -47,8 +58,10 @@ $recipient_phone = $recipient['recipient_phone'] ?? '';
     <nav class="navbar-primary sticky">
         <a href="#" class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"></span></a>
         <ul class="navbar-primary-menu">
-            <li> <a class="d-flex align-items-center pl-3 text-white text-decoration-none"><span class="fs-4">Customers</span></a></li>
-            <li><a href="../index.php" class="nav-link text-white"><i class="icon-dashboard icon-2x"></i> Dashboard </a></li>
+            <li> <a class="d-flex align-items-center pl-3 text-white text-decoration-none"><span
+                        class="fs-4">Customers</span></a></li>
+            <li><a href="../index.php" class="nav-link text-white"><i class="icon-dashboard icon-2x"></i> Dashboard </a>
+            </li>
             <li><a href="customer.php" class="nav-link text-white">Customer List</a></li>
         </ul>
     </nav>
@@ -61,22 +74,29 @@ $recipient_phone = $recipient['recipient_phone'] ?? '';
                             <h3>Edit Recipient Information</h3>
                         </div>
                         <div class="card-body">
-                            <form action="reupdate.php?recipient_id=<?php echo $recipient_id ?>&customer_id=<?php echo $customer_id ?>" method="post">
+                            <form
+                                action="reupdate.php?recipient_id=<?php echo $recipient_id ?>&customer_id=<?php echo $customer_id ?>"
+                                method="post">
                                 <div class="mb-3">
                                     <label class="form-label">Recipient Name <span class="required">*</span></label>
-                                    <input type="text" class="form-control" name="name" value="<?php echo htmlspecialchars($recipient_name) ?>" required>
+                                    <input type="text" class="form-control" name="name"
+                                        value="<?php echo htmlspecialchars($recipient_name) ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Address <span class="required">*</span></label>
-                                    <input type="text" class="form-control" name="address" value="<?php echo htmlspecialchars($recipient_address) ?>" required>
+                                    <input type="text" class="form-control" name="address"
+                                        value="<?php echo htmlspecialchars($recipient_address) ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($recipient_email ?? '') ?>">
+                                    <input type="email" class="form-control" name="email"
+                                        value="<?php echo htmlspecialchars($recipient_email ?? '') ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Phone <span class="required">*</span></label>
-                                    <input type="tel" id="recipient_phone" class="form-control" name="phone" value="<?php echo htmlspecialchars($recipient_phone ?? '') ?>" placeholder="XXX-XXX-XXXX" required>
+                                    <input type="tel" id="recipient_phone" class="form-control" name="phone"
+                                        value="<?php echo htmlspecialchars($recipient_phone ?? '') ?>"
+                                        placeholder="XXX-XXX-XXXX" required>
                                     <small class="text-muted">Format: 10 digits</small>
                                 </div>
                                 <button class="btn btn-primary w-100" name="update">Update Recipient</button>
@@ -89,13 +109,13 @@ $recipient_phone = $recipient['recipient_phone'] ?? '';
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#recipient_phone').on('input', function(e) {
+        $(document).ready(function () {
+            $('#recipient_phone').on('input', function (e) {
                 var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
                 e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
             });
 
-            $('form').on('submit', function() {
+            $('form').on('submit', function () {
                 // Remove dashes before submitting to database
                 var phoneVal = $('#recipient_phone').val().replace(/-/g, '');
                 if (phoneVal.length !== 10) {

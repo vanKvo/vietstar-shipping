@@ -4,6 +4,8 @@ FROM php:8.3.3-apache
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
+    git \
+    unzip \
   && docker-php-ext-install pdo_mysql mysqli zip \
   && docker-php-ext-enable mysqli \
   && a2enmod rewrite
@@ -14,8 +16,14 @@ RUN apt-get update && apt-get install -y \
 # - zip / libzip-dev: While not strictly required for DB access, it's a very common requirement for Composer and Excel/PDF export libraries used in modern enterprise apps.
 # - a2enmod rewrite: Essential for implementing a front-controller routing pattern (like forcing all traffic through index.php) which is a core industry standard for clean URLs and MVC setups.
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Copy codebase into the container
 COPY . /var/www/html/
+
+# Install PHP dependencies via Composer
+RUN composer install --no-dev --optimize-autoloader
 
 # Set correct permissions
 RUN chown -R www-data:www-data /var/www/html/

@@ -36,6 +36,37 @@ INSERT INTO `customer` (`customer_id`, `cust_name`, `cust_address`, `cust_city`,
 (32, 'Kitty Chen', '55 Snow Lake Dr', 'Arlington', 'VA', '22201', 'kchen@example.com', '5017778908'),
 (33, 'Kitty Lee', '34 Blue Street', 'Falls Church', 'VA', '22042', 'klee@example.com', '5715789493');
 
+-- Dumping data for table `shipping_order`
+INSERT INTO `shipping_order` (`shipping_order_id`, `mst`, `send_date`, `airport_delivery_date`, `total_weight`, `num_of_packages`, `package_value`, `custom_fee`, `insurance`, `payment_method`, `user_id`, `location`, `customer_id`, `recipient_id`, `price_per_lb`, `amount`, `custom_fee_taxed_item`, `sales_id`, `note`) VALUES
+(1, '14000', '2022-02-28', '2022-02-28', 16.5, 1, 0, 0, 0, 'Cash', 1, 'Long An Province', 22, 38, 3.25, 228.63, 'NONE', 8, NULL),
+(2, '14001', '2022-03-03', '2022-03-03', 13, 1, 250, 16, 0, 'Credit', 1, 'Sai Gon', 8, 19, 3.25, 58.25, '8 lbs Vitamin', NULL, NULL),
+(3, '14002', '2022-03-05', '2022-03-05', 11, 1, 0, 20, 0, 'Zelle', 1, 'Sai Gon', 1, 39, 3.25, 55.75, '8 pairs shoes', NULL, NULL),
+(4, '14003', '2022-03-08', '2022-03-08', 27.5, 2, 80, 10, 0, 'Cash', 1, 'Binh Duong Province', 23, 40, 3.75, 113.13, '5 Ensure milk cases', NULL, NULL),
+(5, '14004', '2022-03-10', '2022-03-10', 7.5, 1, 0, 6, 0, 'Venmo', 1, 'Sai Gon', 2, 2, 3.25, 30.38, '3 pairs shoes', NULL, NULL),
+(6, '14005', '2022-03-08', '2022-03-08', 15, 1, 0, 16, 0, 'Cash', 1, 'Sai Gon', 10, 21, 3.5, 68.5, '8 lbs multivitamins', NULL, NULL),
+(7, '14006', '2022-03-10', '2022-03-10', 40, 1, 80, 0, 0, 'Cash', 1, 'Dong Nai Province', 24, 41, 3.75, 350, 'NONE', 9, NULL),
+(8, '14007', '2022-03-11', '2022-03-11', 12, 1, 250, 0, 0, 'Cash', 1, 'Sai Gon', 8, 19, 3.5, 122, 'NONE', 10, NULL),
+(9, '14008', '2022-03-11', '2022-03-11', 19, 1, 80, 0, 0, 'Credit', 1, 'Binh Duong Province', 13, 28, 3.75, 186.25, 'NONE', 13, NULL),
+(10, '14009', '2022-03-14', '2022-03-16', 14.3, 1, 50, 15, 0, 'Check', 1, 'Sai Gon', 9, 20, 3.5, 228.05, '4 pairs shoes', 17, NULL),
+(12, '14010', '2022-03-15', '2022-03-15', 17, 1, 0, 35, 0, 'Zelle', 2, 'Tay Ninh Province', 2, 12, 3.75, 168.75, '10 pairs shoes', 19, NULL),
+(13, '14011', '2022-03-16', '2022-03-16', 23.5, 2, 80, 16, 0, 'Cash', 2, 'Lam Dong Province', 14, 30, 3.5, 213.25, '8 pairs shoes', 24, NULL),
+(14, '14012', '2022-03-18', '2022-03-20', 15.67, 1, 0, 150, 10, 'Cash', 2, 'Sai Gon', 25, 42, 2.95, 279.23, 'Electronics (iPhone 12)', 25, NULL),
+(15, '14013', '2022-03-18', '2022-03-20', 40.8, 2, 0, 150, 10, 'Cash', 2, 'Vung Tau City', 26, 43, 3.75, 386, 'Electronics (iPhone 12)', 26, NULL),
+(16, '14014', '2022-03-16', '2022-03-16', 7.45, 1, 80, 0, 0, 'Cash', 2, 'Sai Gon', 13, 28, 3.25, 104.21, 'Personal Effects', 27, NULL),
+(17, '14015', '2022-03-16', '2022-03-16', 11.25, 1, 0, 0, 0, 'Credit', 2, 'Sai Gon', 2, 2, 3.75, 112.19, 'Personal Effects', 28, NULL),
+(18, '14016', '2022-03-16', '2022-03-19', 5, 1, 0, 0, 0, 'Cash', 3, 'Sai Gon', 27, 44, 3.5, 17.5, 'Personal Effects', NULL, NULL),
+(19, '14017', '2022-03-18', '2022-03-20', 40.31, 3, 0, 55, 10, 'Zelle', 3, 'Sai Gon', 28, 45, 2.95, 231.91, 'Electronics (iPad, Airpods)', 29, NULL),
+(20, '14018', '2022-03-16', '2022-03-18', 23.21, 4, 0, 0, 0, 'Cash', 3, 'Sai Gon', 29, 46, 3.25, 75.43, 'Personal Effects', NULL, NULL),
+(21, '14019', '2022-03-16', '2022-03-18', 22.82, 3, 50, 0, 0, 'Zelle', 3, 'Sai Gon', 9, 20, 3.25, 74.17, 'Personal Effects', NULL, NULL),
+(22, '14020', '2022-03-17', '2022-03-17', 24.33, 3, 0, 0, 0, 'Cash', 3, 'Sai Gon', 1, 47, 3.25, 79.07, 'Personal Effects', NULL, NULL),
+(23, '14021', '2022-03-17', '2022-03-21', 25.05, 4, 0, 100, 10, 'Zelle', 3, 'Sai Gon', 30, 48, 3.25, 231.41, 'Electronics (iPad)', 32, 'Order Cancelled'),
+(24, '14022', '2022-03-17', '2022-03-21', 20.35, 3, 0, 4, 10, 'Check', 3, 'Binh Thuan Province', 1, 4, 3.75, 133.31, '2 pairs shoes', 33, NULL),
+(25, '14023', '2022-03-17', '2022-03-17', 12.16, 3, 0, 0, 0, 'Zelle', 3, 'Bac Lieu Province', 32, 49, 3.75, 45.6, 'Personal Effects', NULL, NULL),
+(26, '14024', '2022-03-17', '2026-04-14', 19.85, 3, 0, 0, 0, 'Venmo', 3, 'Sai Gon', 33, 50, 3.25, 64.51, 'Personal Effects', 34, NULL),
+(27, '14025', '2022-03-18', '2026-04-16', 11.35, 1, 0, 0, 0, 'Credit', 3, 'Sai Gon', 25, 42, 3.25, 106.89, 'Personal Effects', 36, 'Refunded'),
+(28, '14026', '2022-03-18', '2026-04-17', 6.75, 1, 80, 0, 0, 'Venmo', 3, 'Hue City', 13, 28, 3.25, 21.94, 'Personal Effects', NULL, NULL),
+(29, '14027', '2022-03-18', '2026-04-18', 6.78, 1, 0, 0, 0, 'Zelle', 3, 'Sai Gon', 13, 28, 3.25, 22.04, 'Personal Effects', NULL, 'Order Cancelled');
+
 -- Dumping data for table `package`
 INSERT INTO `package` (`pkg_id`, `shipping_order_id`, `package_desc`, `package_weight`, `mst`, `pkg_tracking_no`) VALUES
 (1, 1, '15 Ensure Milk', 16.5, '14000', 1),
@@ -102,23 +133,6 @@ INSERT INTO `products` (`product_id`, `product_code`, `product_category`, `produ
 (71, 'SKU013', 'Vitamin', 'MultiCentrum50Plus', 23.99, 50, 'Right shelf - 5A'),
 (72, 'SKU014', 'Snack', 'Kitty Candy', 8.5, 29, 'Left shelf - 5A'),
 (75, 'SKU016', 'Vitamin', 'Vitamin B1', 15, 105, 'Right shelf - 5B');
-
--- Dumping data for table `purchase`
-INSERT INTO `purchase` (`purchase_id`, `supplier_id`, `user_id`, `purchase_date`, `purchase_cost`, `purchase_qty`, `product_id`) VALUES
-(9, 6, 1, '2022-03-04', 11, 13, 58),
-(10, 6, 1, '2022-03-04', 11, 21, 58),
-(11, 6, 1, '2022-03-04', 18, 30, 62),
-(12, 7, 1, '2022-03-04', 10, 50, 65),
-(13, 6, 1, '2022-03-04', 13, 50, 58),
-(14, 6, 1, '2022-03-04', 8.5, 88, 59),
-(15, 6, 1, '2022-03-11', 13, 15, 58),
-(16, 6, 1, '2022-03-15', 15, 50, 61),
-(17, 5, 2, '2022-03-15', 10, 50, 59),
-(18, 5, 3, '2022-03-15', 13.5, 100, 61),
-(19, NULL, 3, '2022-03-15', 13, 10, 60),
-(20, 7, 3, '2022-03-15', 13.5, 30, 64),
-(21, 6, 3, '2022-04-16', 13, 50, 75),
-(22, 8, 3, '2022-04-17', 16, 55, 75);
 
 -- Dumping data for table `recipient`
 INSERT INTO `recipient` (`recipient_id`, `recipient_name`, `recipient_address`, `recipient_phone`, `customer_id`, `recipient_email`) VALUES
@@ -246,36 +260,6 @@ INSERT INTO `sales_order` (`sales_order_id`, `invoice`, `qty_picked`, `sales_ord
 (38, '33', 1, 43, 60, 33, 43),
 (39, '36', 2, 70, 59, 36, 35);
 
--- Dumping data for table `shipping_order`
-INSERT INTO `shipping_order` (`shipping_order_id`, `mst`, `send_date`, `airport_delivery_date`, `total_weight`, `num_of_packages`, `package_value`, `custom_fee`, `insurance`, `payment_method`, `user_id`, `location`, `customer_id`, `recipient_id`, `price_per_lb`, `amount`, `custom_fee_taxed_item`, `sales_id`, `note`) VALUES
-(1, '14000', '2022-02-28', '2022-02-28', 16.5, 1, 0, 0, 0, 'Cash', 1, 'Long An Province', 22, 38, 3.25, 228.63, 'NONE', 8, NULL),
-(2, '14001', '2022-03-03', '2022-03-03', 13, 1, 250, 16, 0, 'Credit', 1, 'Sai Gon', 8, 19, 3.25, 58.25, '8 lbs Vitamin', NULL, NULL),
-(3, '14002', '2022-03-05', '2022-03-05', 11, 1, 0, 20, 0, 'Zelle', 1, 'Sai Gon', 1, 39, 3.25, 55.75, '8 pairs shoes', NULL, NULL),
-(4, '14003', '2022-03-08', '2022-03-08', 27.5, 2, 80, 10, 0, 'Cash', 1, 'Binh Duong Province', 23, 40, 3.75, 113.13, '5 Ensure milk cases', NULL, NULL),
-(5, '14004', '2022-03-10', '2022-03-10', 7.5, 1, 0, 6, 0, 'Venmo', 1, 'Sai Gon', 2, 2, 3.25, 30.38, '3 pairs shoes', NULL, NULL),
-(6, '14005', '2022-03-08', '2022-03-08', 15, 1, 0, 16, 0, 'Cash', 1, 'Sai Gon', 10, 21, 3.5, 68.5, '8 lbs multivitamins', NULL, NULL),
-(7, '14006', '2022-03-10', '2022-03-10', 40, 1, 80, 0, 0, 'Cash', 1, 'Dong Nai Province', 24, 41, 3.75, 350, 'NONE', 9, NULL),
-(8, '14007', '2022-03-11', '2022-03-11', 12, 1, 250, 0, 0, 'Cash', 1, 'Sai Gon', 8, 19, 3.5, 122, 'NONE', 10, NULL),
-(9, '14008', '2022-03-11', '2022-03-11', 19, 1, 80, 0, 0, 'Credit', 1, 'Binh Duong Province', 13, 28, 3.75, 186.25, 'NONE', 13, NULL),
-(10, '14009', '2022-03-14', '2022-03-16', 14.3, 1, 50, 15, 0, 'Check', 1, 'Sai Gon', 9, 20, 3.5, 228.05, '4 pairs shoes', 17, NULL),
-(12, '14010', '2022-03-15', '2022-03-15', 17, 1, 0, 35, 0, 'Zelle', 2, 'Tay Ninh Province', 2, 12, 3.75, 168.75, '10 pairs shoes', 19, NULL),
-(13, '14011', '2022-03-16', '2022-03-16', 23.5, 2, 80, 16, 0, 'Cash', 2, 'Lam Dong Province', 14, 30, 3.5, 213.25, '8 pairs shoes', 24, NULL),
-(14, '14012', '2022-03-18', '2022-03-20', 15.67, 1, 0, 150, 10, 'Cash', 2, 'Sai Gon', 25, 42, 2.95, 279.23, 'Electronics (iPhone 12)', 25, NULL),
-(15, '14013', '2022-03-18', '2022-03-20', 40.8, 2, 0, 150, 10, 'Cash', 2, 'Vung Tau City', 26, 43, 3.75, 386, 'Electronics (iPhone 12)', 26, NULL),
-(16, '14014', '2022-03-16', '2022-03-16', 7.45, 1, 80, 0, 0, 'Cash', 2, 'Sai Gon', 13, 28, 3.25, 104.21, 'Personal Effects', 27, NULL),
-(17, '14015', '2022-03-16', '2022-03-16', 11.25, 1, 0, 0, 0, 'Credit', 2, 'Sai Gon', 2, 2, 3.75, 112.19, 'Personal Effects', 28, NULL),
-(18, '14016', '2022-03-16', '2022-03-19', 5, 1, 0, 0, 0, 'Cash', 3, 'Sai Gon', 27, 44, 3.5, 17.5, 'Personal Effects', NULL, NULL),
-(19, '14017', '2022-03-18', '2022-03-20', 40.31, 3, 0, 55, 10, 'Zelle', 3, 'Sai Gon', 28, 45, 2.95, 231.91, 'Electronics (iPad, Airpods)', 29, NULL),
-(20, '14018', '2022-03-16', '2022-03-18', 23.21, 4, 0, 0, 0, 'Cash', 3, 'Sai Gon', 29, 46, 3.25, 75.43, 'Personal Effects', NULL, NULL),
-(21, '14019', '2022-03-16', '2022-03-18', 22.82, 3, 50, 0, 0, 'Zelle', 3, 'Sai Gon', 9, 20, 3.25, 74.17, 'Personal Effects', NULL, NULL),
-(22, '14020', '2022-03-17', '2022-03-17', 24.33, 3, 0, 0, 0, 'Cash', 3, 'Sai Gon', 1, 47, 3.25, 79.07, 'Personal Effects', NULL, NULL),
-(23, '14021', '2022-03-17', '2022-03-21', 25.05, 4, 0, 100, 10, 'Zelle', 3, 'Sai Gon', 30, 48, 3.25, 231.41, 'Electronics (iPad)', 32, 'Order Cancelled'),
-(24, '14022', '2022-03-17', '2022-03-21', 20.35, 3, 0, 4, 10, 'Check', 3, 'Binh Thuan Province', 1, 4, 3.75, 133.31, '2 pairs shoes', 33, NULL),
-(25, '14023', '2022-03-17', '2022-03-17', 12.16, 3, 0, 0, 0, 'Zelle', 3, 'Bac Lieu Province', 32, 49, 3.75, 45.6, 'Personal Effects', NULL, NULL),
-(26, '14024', '2022-03-17', '2026-04-14', 19.85, 3, 0, 0, 0, 'Venmo', 3, 'Sai Gon', 33, 50, 3.25, 64.51, 'Personal Effects', 34, NULL),
-(27, '14025', '2022-03-18', '2026-04-16', 11.35, 1, 0, 0, 0, 'Credit', 3, 'Sai Gon', 25, 42, 3.25, 106.89, 'Personal Effects', 36, 'Refunded'),
-(28, '14026', '2022-03-18', '2026-04-17', 6.75, 1, 80, 0, 0, 'Venmo', 3, 'Hue City', 13, 28, 3.25, 21.94, 'Personal Effects', NULL, NULL),
-(29, '14027', '2022-03-18', '2026-04-18', 6.78, 1, 0, 0, 0, 'Zelle', 3, 'Sai Gon', 13, 28, 3.25, 22.04, 'Personal Effects', NULL, 'Order Cancelled');
 -- Dumping data for table `supliers`
 INSERT INTO `supliers` (`suplier_id`, `suplier_name`, `suplier_address`, `suplier_contact`, `contact_person`, `note`) VALUES
 (5, 'YumYum Confections', '45 Candy Street, Arlington, VA 22201', 'Minh Nguyen', '5716789900', 'Gourmet snacks and specialized candies'),
@@ -305,5 +289,22 @@ INSERT INTO `temp_shipping_order` (`shipping_order_id`, `num_of_package`, `packa
 (5, 1, 80, 'Tinh', 'Washington Lee', '99 BLuesky', 'Chantilly', 'VA', 22055, '3035678907', NULL, 'Anita', '10 Nguyen Dinh Chieu, Q.1, TP.HCM', '0913888678', NULL, '2022-01-26', '5 Vitamin C, 8 Ensure, 28 dried dates'),
 (6, 1, 80, 'Saigon', 'Johanna', '78 Langley Street', 'Chantilly', 'VA', 22055, '2035678907', NULL, 'Hong Ai', '1000 Ben Thanh, Q.1, TP.HCM', '0916123678', NULL, '2022-01-15', '10 Vitamin E, 5 shoes'),
 (7, 1, 80, 'Saigon', 'Yen Nguyen', '22 Langley Street', 'Chantilly', 'VA', 22055, '2035678907', NULL, 'Hong Ai', '72 Ben Thanh, Q.1, TP.HCM', '0919909678', NULL, '2022-01-13', '8 Salt package, 5 dried dates box');
+
+-- Dumping data for table `purchase`
+INSERT INTO `purchase` (`purchase_id`, `supplier_id`, `user_id`, `purchase_date`, `purchase_cost`, `purchase_qty`, `product_id`) VALUES
+(9, 6, 1, '2022-03-04', 11, 13, 58),
+(10, 6, 1, '2022-03-04', 11, 21, 58),
+(11, 6, 1, '2022-03-04', 18, 30, 62),
+(12, 7, 1, '2022-03-04', 10, 50, 65),
+(13, 6, 1, '2022-03-04', 13, 50, 58),
+(14, 6, 1, '2022-03-04', 8.5, 88, 59),
+(15, 6, 1, '2022-03-11', 13, 15, 58),
+(16, 6, 1, '2022-03-15', 15, 50, 61),
+(17, 5, 2, '2022-03-15', 10, 50, 59),
+(18, 5, 3, '2022-03-15', 13.5, 100, 61),
+(19, NULL, 3, '2022-03-15', 13, 10, 60),
+(20, 7, 3, '2022-03-15', 13.5, 30, 64),
+(21, 6, 3, '2022-04-16', 13, 50, 75),
+(22, 8, 3, '2022-04-17', 16, 55, 75);
 
 SET FOREIGN_KEY_CHECKS=1;

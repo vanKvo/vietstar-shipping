@@ -1,0 +1,44 @@
+name: Production Deployment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    runs-name: Deploy to AWS Lightsail
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Zip application files
+        run: zip -r app.zip business_portal database -x "*/vendor/*" "*/node_modules/*" "*/.git/*"
+
+      - name: Copy files to server via SCP
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.AWS_HOST_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "app.zip"
+          target: "/home/ubuntu/app/"
+          overwrite: true
+
+      - name: Execute deployment commands via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.AWS_HOST_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/app
+            unzip -o app.zip
+            rm app.zip
+            cd /home/ubuntu/app/business_portal
+            # Rebuild containers with new code and restart seamlessly
+            sudo docker compose build --no-cache app
+            sudo docker compose up -d

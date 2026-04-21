@@ -1,22 +1,83 @@
 version: '3.8'
 
 services:
+  # -----------------------------------------------------------------------
+  # 1. Reverse Proxy (nginx-proxy)
+  # Automatically detects new web containers and routes Port 80/443 traffic to them.
+  # This prevents developers from having to manually write Nginx routing rules.
+  # -----------------------------------------------------------------------
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DEFAULT_HOST=app
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: always
+
+  # -----------------------------------------------------------------------
+  # 2. SSL Manager (acme-companion)
+  # Watches the 'nginx-proxy' for any containers that have a 'LETSENCRYPT_HOST' set.
+  # It automatically talks to Let's Encrypt, downloads the certs, and auto-renews them.
+  # -----------------------------------------------------------------------
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    environment:
+      - DEFAULT_EMAIL=${ADMIN_EMAIL:-admin@example.com}
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx-proxy
+    restart: always
+
+  # -----------------------------------------------------------------------
+  # 3. Core PHP Application (app)
+  # Your custom Business Portal. It exposes port 80 internally to the proxy.
+  # When VIRTUAL_HOST is matched, the proxy sends external traffic here securely.
+  # -----------------------------------------------------------------------
   app:
     build:
       context: .
       dockerfile: Dockerfile
+    expose:
+      - "80"
+    # Fallback to port 8081 mapping to retain previous behavior for direct IP queries if needed
     ports:
       - "8081:80"
     volumes:
       - .:/var/www/html
+      - /var/www/html/vendor
     environment:
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+      - SENTRY_DSN=${SENTRY_DSN}
+      - CLARITY_ID=${CLARITY_ID}
+      - VIRTUAL_HOST=${DOMAIN:-app}
+      - LETSENCRYPT_HOST=${DOMAIN}
     depends_on:
       - db
+    restart: always
 
+  # -----------------------------------------------------------------------
+  # 4. Database Server (db)
+  # MySQL server backend. It uses a persistent volume so data isn't lost on restart.
+  # Bootstrapped automatically with schemas/users on its very first launch.
+  # -----------------------------------------------------------------------
   db:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
@@ -35,3 +96,8 @@ services:
 
 volumes:
   db_data:
+  conf:
+  vhost:
+  html:
+  certs:
+  acme:

@@ -19,6 +19,22 @@ if (!function_exists('loadEnv')) {
 // Load .env from business_portal root
 loadEnv(__DIR__ . '/../.env');
 
+// Initialize Sentry for PHP Error & Crash Tracking
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+    if (!empty($_ENV['SENTRY_DSN'])) {
+        \Sentry\init([
+            'dsn' => $_ENV['SENTRY_DSN'],
+            // Enable performance monitoring
+            'traces_sample_rate' => 1.0,
+            // Set a sampling rate for profiling - this is relative to traces_sample_rate
+            'profiles_sample_rate' => 1.0,
+            // Enable logs to be sent to Sentry
+            'enable_logs' => true,
+        ]);
+    }
+}
+
 $db_host = $_ENV['DB_HOST'] ?? 'localhost';
 $db_user = $_ENV['DB_USER'] ?? 'root';
 $db_pass = $_ENV['DB_PASSWORD'] ?? 'root';
