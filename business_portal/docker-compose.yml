@@ -3,8 +3,7 @@ version: '3.8'
 services:
   # -----------------------------------------------------------------------
   # 1. Reverse Proxy (nginx-proxy)
-  # Automatically detects new web containers and routes Port 80/443 traffic to them.
-  # This prevents developers from having to manually write Nginx routing rules.
+  # Automatically detects new web containers and routes Port 80/443 traffic.
   # -----------------------------------------------------------------------
   nginx-proxy:
     image: nginxproxy/nginx-proxy:alpine
@@ -32,6 +31,7 @@ services:
     container_name: nginx-proxy-acme
     environment:
       - DEFAULT_EMAIL=${ADMIN_EMAIL:-admin@example.com}
+      - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
       - conf:/etc/nginx/conf.d
       - vhost:/etc/nginx/vhost.d

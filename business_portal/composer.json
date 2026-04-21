@@ -1,0 +1,7 @@
+{
+    "name": "vietstar/business_portal",
+    "description": "Vietstar Shipping Business Portal",
+    "require": {
+        "sentry/sentry": "^4.0"
+    }
+}
