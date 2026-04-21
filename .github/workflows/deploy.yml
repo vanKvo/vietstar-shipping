@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-name: Deploy to AWS Lightsail
+    name: Deploy to AWS Lightsail
     runs-on: ubuntu-latest
 
     steps:
