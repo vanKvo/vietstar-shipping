@@ -5,43 +5,43 @@ services:
   # 1. Reverse Proxy (nginx-proxy)
   # Automatically detects new web containers and routes Port 80/443 traffic.
   # -----------------------------------------------------------------------
-  nginx-proxy:
-    image: nginxproxy/nginx-proxy:alpine
-    container_name: nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    environment:
-      - DEFAULT_HOST=app
-    volumes:
-      - conf:/etc/nginx/conf.d
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - certs:/etc/nginx/certs:ro
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    restart: always
+  #nginx-proxy:
+  #  image: nginxproxy/nginx-proxy:alpine
+  #  container_name: nginx-proxy
+  #  ports:
+  #    - "80:80"
+  #    - "443:443"
+  #  environment:
+  #    - DEFAULT_HOST=app
+  #  volumes:
+  #    - conf:/etc/nginx/conf.d
+  #    - vhost:/etc/nginx/vhost.d
+  #    - html:/usr/share/nginx/html
+  #    - certs:/etc/nginx/certs:ro
+  #    - /var/run/docker.sock:/tmp/docker.sock:ro
+  #  restart: always
 
   # -----------------------------------------------------------------------
   # 2. SSL Manager (acme-companion)
   # Watches the 'nginx-proxy' for any containers that have a 'LETSENCRYPT_HOST' set.
   # It automatically talks to Let's Encrypt, downloads the certs, and auto-renews them.
   # -----------------------------------------------------------------------
-  acme-companion:
-    image: nginxproxy/acme-companion
-    container_name: nginx-proxy-acme
-    environment:
-      - DEFAULT_EMAIL=${ADMIN_EMAIL:-admin@example.com}
-      - NGINX_PROXY_CONTAINER=nginx-proxy
-    volumes:
-      - conf:/etc/nginx/conf.d
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - certs:/etc/nginx/certs:rw
-      - acme:/etc/acme.sh
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - nginx-proxy
-    restart: always
+  # acme-companion:
+  #  image: nginxproxy/acme-companion
+  #  container_name: nginx-proxy-acme
+  #  environment:
+  #    - DEFAULT_EMAIL=${ADMIN_EMAIL:-admin@example.com}
+  #    - NGINX_PROXY_CONTAINER=nginx-proxy
+  #  volumes:
+  #    - conf:/etc/nginx/conf.d
+  #    - vhost:/etc/nginx/vhost.d
+  #    - html:/usr/share/nginx/html
+  #    - certs:/etc/nginx/certs:rw
+  #    - acme:/etc/acme.sh
+  #    - /var/run/docker.sock:/var/run/docker.sock:ro
+  #  depends_on:
+  #    - nginx-proxy
+  #  restart: always
 
   # -----------------------------------------------------------------------
   # 3. Core PHP Application (app)

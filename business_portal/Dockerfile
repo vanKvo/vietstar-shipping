@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
   && docker-php-ext-install pdo_mysql mysqli zip \
   && docker-php-ext-enable mysqli \
-  && a2enmod rewrite
+  && a2enmod rewrite \
+  && sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 # Rationale for PHP extensions:
 # - pdo_mysql: The modern standard for accessing MySQL databases in PHP through PDO (PHP Data Objects). It provides a secure way to use prepared statements to prevent SQL injection.
