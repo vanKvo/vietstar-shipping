@@ -1,11 +1,11 @@
 # Vietstar Shipping & Inventory Management System
 
-**Current Version:** `v1.1.0`
+**Version:** `v1.1.0`
 
 ## Executive Summary
 **Vietstar Shipping** is a retail and logistics business providing international shipping services and in-store merchandise sales. This project represents a full digital transformation of the company’s legacy operations. 
 
-By migrating from manual, paper-based workflows to a cloud web application, we successfully reduced shipping and inventory processing time by 48%, eliminated data redundancy, streamlined business operations, and provided management with sales analytics.
+By migrating from manual, paper-based workflows to a cloud web application, we successfully digitized shipping and inventory management, eliminated data redundancy, enhanced business operations, and provided management with essential analytics.
 
 ![Project Screenshot](website/images/vietstar_shipping_dashboard.png)
 
@@ -44,15 +44,34 @@ This repository contains two distinct components of the overall system:
 
 ---
 
-## Cloud Architecture & Modernization
-To ensure the application is scalable, maintainable, and cost-effective, the infrastructure was recently modernized using cloud-native paradigms:
+## Cloud Architecture & Infrastructure
+To ensure the application is scalable, maintainable, and cost-effective, the project supports two infrastructure tiers managed via Terraform.
 
-* **Containerization:** Packaged the application using Docker to guarantee environment parity across development and production environments.
-* **Infrastructure as Code (IaC):** Utilized Terraform to systematically provision the application stack on AWS. This practice makes the infrastructure completely version-controlled, highly repeatable, and minimizes human error. It also allows developers to rapidly tear down environments when not in active use, drastically optimizing cloud costs.
-* **Cloud Hosting:** Deployed to AWS Lightsail to provide a predictable, low-cost footprint optimized for small business operations while preserving high availability.
-* **Data Tier:** Leveraged managed MySQL environments for automated backups, enhanced security, and robust storage scaling.
-* **Real-time Error Monitoring:** Integrated Sentry to capture and aggregate runtime exceptions or fatal errors. This provides the development team with detailed stack traces the exact moment users experience an issue, ensuring bugs are diagnosed and fixed ASAP before impacting business operations.
-* **CI/CD Pipeline:** Automated the deployment lifecycle using GitHub Actions. Upon merging to the main branch, a remote runner bundles the source code, securely transmits it to the AWS server via SCP, and executes a rolling Docker Compose update over SSH, ensuring zero-downtime releases.
+### 1. Demo Infrastructure (`terraform_aws/`)
+Optimized for low-cost, high-performance demonstrations.
+*   **Provider:** AWS Lightsail
+*   **Architecture:** Single-instance "Dualstack" VPS.
+*   **Cost:** ~$10/month.
+*   **Best For:** Live previews, client demos, and staging environments.
+
+### 2. Production Infrastructure (`terraform_aws_prod/`)
+Enterprise-grade architecture designed for high availability and security.
+*   **Networking:** Custom VPC with **6 subnets** across two Availability Zones (Multi-AZ) to eliminate single points of failure:
+    *   **2 Public Subnets:** Hosts the ALB and NAT Gateway for secure ingress/egress.
+    *   **2 Private Subnets:** Isolates EC2 application instances from the public internet.
+    *   **2 Isolated Subnets:** Dedicated tier for RDS, ensuring the database is unreachable from the outside world.
+*   **Compute:** Auto Scaling Group (ASG) of EC2 instances behind an Application Load Balancer (ALB).
+*   **Database:** Managed RDS MySQL with Multi-AZ Deployment for instant failover and automated backups.
+*   **Security:** Private instance isolation (no public IPs for app/DB), SSL termination via ACM, and granular Security Groups.
+*   **Cost:** ~$120/month (Premium for reliability).
+
+---
+
+## Modernization Features
+*   **Containerization:** Packaged the application using Docker to guarantee environment parity across development and production environments.
+*   **Infrastructure as Code (IaC):** Utilized Terraform to systematically provision the application stack. This ensures the infrastructure is version-controlled, repeatable, and eliminates manual configuration drift.
+*   **Real-time Error Monitoring:** Integrated Sentry to capture and aggregate runtime exceptions, providing detailed stack traces for rapid diagnosis.
+*   **CI/CD Pipeline:** Automated the deployment lifecycle using GitHub Actions. Upon merging to the main branch, code is bundled, tested, and deployed to the target infrastructure with zero-downtime rolling updates.
 
 ---
 
@@ -134,7 +153,7 @@ This will trigger the initialization scripts (`1_schema.sql` and `2_data.sql`) t
 
 ---
 
-## 📅 Version History & Changelog
+## Version History & Changelog
 
 ### [1.1.0] - 2026-04-19 (Modernization Update)
 **"Cloud-Native & Containerization"**
