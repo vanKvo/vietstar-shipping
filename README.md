@@ -170,5 +170,12 @@ This will trigger the initialization scripts (`1_schema.sql` and `2_data.sql`) t
 
 ---
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Legal Notice & Usage
+**© 2026 Vietstar Shipping Project. All Rights Reserved.**
+
+This repository contains proprietary source code published for technical assessment purposes only. 
+
+*   **Authorized Use:** Individuals are permitted to view and review the source code, architecture, and documentation to assess the author's technical proficiency.
+*   **Prohibited Actions:** Cloning, forking, downloading, or redistributing this repository is strictly prohibited. This code may not be used for any commercial, personal, or educational purposes. 
+
+Unauthorized use of this intellectual property will be subject to a formal DMCA takedown request and potential legal action. For inquiries regarding the code or architecture, please contact the author directly.

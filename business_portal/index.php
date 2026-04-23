@@ -1,4 +1,9 @@
 <?php
+/**
+ * Vietstar Shipping & Inventory Management System
+ * Proprietary Source Code - All Rights Reserved
+ * Copyright (c) 2026
+ */
 	//Start session
 	session_start();
 	
