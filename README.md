@@ -51,7 +51,6 @@ To ensure the application is scalable, maintainable, and cost-effective, the pro
 Optimized for low-cost, high-performance demonstrations.
 *   **Provider:** AWS Lightsail
 *   **Architecture:** Single-instance "Dualstack" VPS.
-*   **Cost:** ~$10/month.
 *   **Best For:** Live previews, client demos, and staging environments.
 
 ### 2. Production Infrastructure (`terraform_aws_prod/`)
@@ -63,7 +62,6 @@ Enterprise-grade architecture designed for high availability and security.
 *   **Compute:** Auto Scaling Group (ASG) of EC2 instances behind an Application Load Balancer (ALB).
 *   **Database:** Managed RDS MySQL with Multi-AZ Deployment for instant failover and automated backups.
 *   **Security:** Private instance isolation (no public IPs for app/DB), SSL termination via ACM, and granular Security Groups.
-*   **Cost:** ~$120/month (Premium for reliability).
 
 ---
 
@@ -167,15 +165,3 @@ This will trigger the initialization scripts (`1_schema.sql` and `2_data.sql`) t
 * **Core:** Delivered the initial prototype of the Business Portal and Public Website.
 * **Features:** Implemented basic shipping orchestration, inventory tracking, and POS functionality.
 * **Collaboration:** Successfully completed the two-semester capstone engineering cycle.
-
----
-
-## Legal Notice & Usage
-**© 2026 Vietstar Shipping Project. All Rights Reserved.**
-
-This repository contains proprietary source code published for technical assessment purposes only. 
-
-*   **Authorized Use:** Individuals are permitted to view and review the source code, architecture, and documentation to assess the author's technical proficiency.
-*   **Prohibited Actions:** Cloning, forking, downloading, or redistributing this repository is strictly prohibited. This code may not be used for any commercial, personal, or educational purposes. 
-
-Unauthorized use of this intellectual property will be subject to a formal DMCA takedown request and potential legal action. For inquiries regarding the code or architecture, please contact the author directly.
