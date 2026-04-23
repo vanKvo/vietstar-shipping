@@ -1,8 +1,25 @@
-.env
-.settings
-.config
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+.history/*
+
+# System files
 .DS_Store
-.vscode
+.env
+
+# Iac
 .terraform
 .terraform.lock.hcl
-.agents
+mysavedplan.tfplan
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars
+
+# Deploy files
+app.zip
+*.zip
+*.jar
