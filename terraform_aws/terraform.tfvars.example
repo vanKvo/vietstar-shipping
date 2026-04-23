@@ -1,0 +1,14 @@
+# AWS Infrastructure - Terraform Variables Example
+# Rename this file to 'terraform.tfvars' and supply your valid SSH keys
+
+# AWS Region to deploy into (Check AWS Lightsail region availability)
+aws_region = "us-east-1"
+
+# Local SSH Key to securely manage the server and push files
+# If you don't have one, generate it with `ssh-keygen -t rsa -b 2048 -f ~/.ssh/aws_key`
+ssh_public_key       = "ssh-rsa AAAA..."
+ssh_private_key_path = "/Users/username/.ssh/aws_key"
+
+# Parent and custom domains for the website 
+parent_domain = "example.com"
+custom_domain = "app.example.com"
