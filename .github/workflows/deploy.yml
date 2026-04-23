@@ -4,13 +4,9 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'README.md'
-      - 'terraform_aws/**'
-      - 'terraform_aws_prod/**'
-      - 'terraform_oracle/**'
-      - '.gitignore'
-      - 'website/**'
+    paths:
+      - 'business_portal/**'
+      - 'database/**'
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 jobs:
