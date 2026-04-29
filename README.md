@@ -2,7 +2,6 @@
 
 **Version:** `v1.1.0`
 
-## Executive Summary
 **Vietstar Shipping** is a retail and logistics business providing international shipping services and in-store merchandise sales. This project represents a full digital transformation of the company’s legacy operations. 
 
 By migrating from manual, paper-based workflows to a cloud web application, we successfully digitized shipping and inventory management, eliminated data redundancy, enhanced business operations, and provided management with essential analytics.
@@ -11,7 +10,7 @@ By migrating from manual, paper-based workflows to a cloud web application, we s
 
 ---
 
-## Repository Structure
+## Project Structure
 This repository contains two distinct components of the overall system:
 * **`business_portal/` (Core Application):** The primary web application responsible for digitalizing the company's internal operations (shipping orchestration, inventory tracking, POS). *Note: The Live Demo, Docker containerization, and CI/CD pipelines are exclusively configured for this portal.*
 * **`website/` (Public Facing):** The informational website designed to present the business and its services to retail customers.
@@ -27,19 +26,19 @@ This repository contains two distinct components of the overall system:
 
 ---
 
-## Key Results & Impact
-* **Operational Efficiency for Shipping:** Decreased customer wait times by nearly 50% during peak shipping seasons via digital shipping order orchestration.
-* **Inventory Accuracy:** Centralized inventory management system that replaced physical ledgers with an automated tracking system, providing low-stock alerts and preventing service interruptions.
+## Key Features & Impacts
+* **Digitalized Shipping Management:** Decreased customer wait times by nearly 50% during peak shipping seasons via digital shipping order orchestration;reduced operational costs by eliminating manual processes and reducing errors.
+* **Inventory Management System:** Centralized inventory management system that replaced physical ledgers with an automated tracking system, providing low-stock alerts and preventing service interruptions.
 * **Sales Reports:** Developed a reporting engine that aggregates daily sales and shipping metrics, enabling data-driven inventory procurement.
-* **Customer Management:** Centralized customer information and shipping history for better customer service.
-* **Cost Optimization:** Reduced operational costs by eliminating manual processes and reducing errors.
+* **Customer Management:** Centralized customer information and shipping history for better customer service. 
+
 ---
 
 ## Tech Stack
 * **Backend:** PHP (Vanilla)
 * **Frontend:** HTML5, CSS3, Bootstrap, jQuery, AJAX
 * **Database:** MySQL (Managed via AWS RDS)
-* **Infrastructure:** AWS (EC2, RDS, Lightsail)
+* **Infrastructure:** AWS (EC2, RDS, ALB, ASG, NAT Gateway, VPC)
 * **DevOps:** Docker, GitHub Actions, Linux/Apache
 
 ---
