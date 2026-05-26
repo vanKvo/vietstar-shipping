@@ -65,6 +65,18 @@
           <div class="card-body p-5 text-center">
 
             <h3 class="mb-5">Vietstar Shipping</h3>
+            <?php
+            if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) > 0) {
+                echo '<div class="alert alert-danger text-start mb-4" role="alert" style="font-size: 0.9rem; border-radius: 0.5rem;">';
+                echo '<ul class="mb-0" style="padding-left: 1.25rem;">';
+                foreach ($_SESSION['ERRMSG_ARR'] as $msg) {
+                    echo '<li>' . htmlspecialchars($msg) . '</li>';
+                }
+                echo '</ul>';
+                echo '</div>';
+                unset($_SESSION['ERRMSG_ARR']);
+            }
+            ?>
 						<form action="login.php" method="post">
 						<!-- <div class="form-outline mb-4">
 								<input type="email" id="typeEmailX-2" class="form-control form-control-lg" />

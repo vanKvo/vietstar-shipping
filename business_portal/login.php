@@ -59,9 +59,10 @@ if ($result) {
 		header("location: main/index.php");
 		exit();
 	} else {
-		echo "Login failed";
-		//header("location: index.php");
-		//exit();
+		$_SESSION['ERRMSG_ARR'] = array('Invalid username or password');
+		session_write_close();
+		header("location: index.php");
+		exit();
 	}
 } else {
 	die("Query failed");
