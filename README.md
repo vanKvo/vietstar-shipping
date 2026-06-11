@@ -17,16 +17,7 @@ This repository contains two distinct components of the overall system:
 
 ---
 
-## Live Demo (Business Portal)
-* **Demo URL:** https://vietstarshipping.vanmuses.com
-* **Guest Access:**
-    * **Username:** `guest`
-    * **Password:** `guest`
-* *Note: Data is reset periodically. Some sample data is added for demonstration purposes.*
-
----
-
-## Key Features & Impacts
+## Key Features
 * **Digitalized Shipping Management:** Decreased customer wait times by nearly 50% during peak shipping seasons via digital shipping order orchestration;reduced operational costs by eliminating manual processes and reducing errors.
 * **Inventory Management System:** Centralized inventory management system that replaced physical ledgers with an automated tracking system, providing low-stock alerts and preventing service interruptions.
 * **Sales Reports:** Developed a reporting engine that aggregates daily sales and shipping metrics, enabling data-driven inventory procurement.
